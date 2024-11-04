@@ -227,6 +227,8 @@ get_bfcap_next:
 			*comp_steering = (vht_bf_cap & BEAMFORMING_VHT_BEAMFORMER_STS_CAP) >> 8;
 		}
 	}
+#else /* CONFIG_80211AC_VHT */
+	;
 #endif /* CONFIG_80211AC_VHT */
 
 }

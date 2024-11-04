@@ -4881,7 +4881,9 @@ s32 rtw_monitor_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
 //	int len = skb->len, rtap_len;
 	int len = skb->len, rtap_len, rtap_remain, alloc_tries, ret;
 	struct ieee80211_radiotap_header *rtap_hdr; // net/ieee80211_radiotap.h
+#ifdef CONFIG_IOCTL_CFG80211
 	struct ieee80211_radiotap_iterator iterator; // net/cfg80211.h
+#endif // CONFIG_IOCTL_CFG80211
 	u8 rtap_buf[256];
 
 	rtw_mstat_update(MSTAT_TYPE_SKB, MSTAT_ALLOC_SUCCESS, skb->truesize);
@@ -4994,6 +4996,7 @@ s32 rtw_monitor_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
 	pattrib->last_txcmdsz = pattrib->pktlen;
 
 /* nrm */
+#ifdef CONFIG_IOCTL_CFG80211
 #ifndef CONFIG_CUSTOMER_ALIBABA_GENERAL
 
 	if (ndev->type == ARPHRD_IEEE80211_RADIOTAP) {
@@ -5161,6 +5164,7 @@ s32 rtw_monitor_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
 	}
 
 #endif // CONFIG_CUSTOMER_ALIBABA_GENERAL
+#endif // CONFIG_IOCTL_CFG80211
 
 	dump_mgntframe(padapter, pmgntframe);
 /* nrm */
